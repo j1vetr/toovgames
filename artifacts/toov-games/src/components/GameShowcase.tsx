@@ -108,7 +108,7 @@ export function GameShowcase() {
           >
             <div className="w-12 h-px bg-neon-cyan" />
             <span className="text-[11px] tracking-[0.3em] text-neon-cyan/60 uppercase font-semibold">
-              {t('First Release', 'Ilk Oyun')}
+              {t('First Release', 'İlk Oyun')}
             </span>
             <div className="w-12 h-px bg-neon-cyan" />
           </motion.div>
@@ -147,7 +147,7 @@ export function GameShowcase() {
           >
             {t(
               'Survive the Neon. A fast-paced 2D dodge game set in the depths of space. Reflexes over strategy. Speed over power.',
-              'Neondan kac. Uzayin derinliklerinde gecen hizli tempolu bir 2D kacis oyunu. Strateji degil refleks. Guc degil hiz.'
+              'Neondan kaç. Uzayın derinliklerinde geçen hız dolu bir 2D kaçış oyunu. Strateji değil refleks. Güç değil hız.'
             )}
           </motion.p>
         </div>

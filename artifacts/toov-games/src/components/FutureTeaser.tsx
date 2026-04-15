@@ -49,17 +49,17 @@ export function FutureTeaser() {
           className="space-y-6"
         >
           <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white/80 tracking-tight leading-tight">
-            {t('Something else', 'Baska bir sey')}
+            {t('Something else', 'Başka bir şey')}
             <br />
             <span className="text-white/30">
-              {t('is being crafted...', 'uretiliyor...')}
+              {t('is being crafted...', 'üretiliyor...')}
             </span>
           </h2>
 
           <p className="text-base md:text-lg text-white/25 max-w-md mx-auto font-light">
             {t(
               'Stay close. The next chapter is being written.',
-              'Yakin ol. Bir sonraki bolum yaziliyor.'
+              'Yakında kal. Bir sonraki bölüm yazılıyor.'
             )}
           </p>
 

@@ -24,10 +24,10 @@ export function Footer() {
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-[12px] text-white/25 tracking-wider">
             <span>&copy; 2026 TOOV Games</span>
             <span className="hidden md:inline text-white/10">|</span>
-            <span>{t('All rights reserved.', 'Tum haklari saklidir.')}</span>
+            <span>{t('All rights reserved.', 'Tüm hakları saklıdır.')}</span>
             <span className="hidden md:inline text-white/10">|</span>
             <span className="text-neon-coral/40">
-              {t('Games are art.', 'Oyunlar sanattir.')}
+              {t('Games are art.', 'Oyunlar sanattır.')}
             </span>
           </div>
 

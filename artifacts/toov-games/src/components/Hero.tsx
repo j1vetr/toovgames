@@ -157,7 +157,7 @@ export function Hero() {
           transition={{ delay: 0.6, duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className="text-[11px] md:text-sm tracking-[0.4em] text-white/40 uppercase mb-6 font-semibold">
-            {t('A 2D Game Studio', 'Bir 2D Oyun Studyosu')}
+            {t('A 2D Game Studio', 'Bir 2D Oyun Stüdyosu')}
           </p>
 
           <h1 className="font-display text-[clamp(3rem,10vw,8rem)] font-extrabold leading-[0.85] tracking-[-0.04em] mb-6">
@@ -174,7 +174,7 @@ export function Hero() {
           <p className="text-base md:text-xl text-white/50 max-w-lg mx-auto leading-relaxed font-light">
             {t(
               'We believe games are art. Every pixel, every frame, every line of code.',
-              'Oyunun bir sanat olduguna inaniyoruz. Her piksel, her kare, her satir kod.'
+              'Oyunların sanat olduğuna inanıyoruz. Her piksel, her kare, her satır kod.'
             )}
           </p>
         </motion.div>
@@ -191,7 +191,7 @@ export function Hero() {
             className="flex flex-col items-center gap-3"
           >
             <span className="text-[10px] tracking-[0.3em] text-white/25 uppercase">
-              {t('Scroll to explore', 'Kesfetmek icin kaydir')}
+              {t('Scroll to explore', 'Keşfetmek için kaydır')}
             </span>
             <div className="w-px h-12 bg-gradient-to-b from-white/20 to-transparent" />
           </motion.div>

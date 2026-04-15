@@ -50,12 +50,12 @@ export function About() {
 
   const aboutText = t(
     'We started with a few lines of code and infinite imagination. TOOV Games was built by a team who believes in the magic of 2D games, for players. We design fluid, dynamic, and challenging experiences for those tired of complex worlds. In every game we develop, we listen to our community, shaping our games with their feedback.',
-    'Birkac satir kod ve sonsuz bir hayal gucuyle basladik. TOOV Games, 2D oyunlarin buyusune inanan bir ekip tarafindan, oyuncular icin kuruldu. Karmasik dunyalardan sikilanlar icin akici, dinamik ve bir o kadar da meydan okuyucu deneyimler tasarliyoruz. Gelistirdigimiz her oyunda toplulugumuzun sesini dinliyor, oyunlarimizi bu geri bildirimlerle sekillendiriyoruz.'
+    'Birkaç satır kod ve sınırsız bir hayal gücüyle yola çıktık. TOOV Games, 2D oyunların büyüsüne yürekten inanan bir ekip tarafından oyuncular için kuruldu. Karmaşık dünyalardan bunalan herkes için akıcı, dinamik ve meydan okuyan deneyimler yaratıyoruz. Her oyunumuzda topluluğumuzun sesine kulak veriyor, geri bildirimleriyle oyunlarımızı şekillendiriyoruz.'
   );
 
   const quoteText = t(
     'For us, gaming is not just a hobby \u2014 it is a form of art.',
-    'Oyun bizce sadece bir hobi degil, bir sanat formudur.'
+    'Bizim için oyun sadece bir hobi değil, başlı başına bir sanat.'
   );
 
   return (

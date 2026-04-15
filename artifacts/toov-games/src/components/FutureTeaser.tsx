@@ -18,7 +18,7 @@ export function FutureTeaser() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-40 md:py-56 w-full flex items-center justify-center overflow-hidden"
+      className="relative py-24 md:py-36 w-full flex items-center justify-center overflow-hidden"
     >
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.03] to-transparent" />

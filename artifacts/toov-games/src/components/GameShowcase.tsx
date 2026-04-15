@@ -171,7 +171,7 @@ export function GameShowcase() {
   const dodgeWord = 'DODGE';
 
   return (
-    <section className="relative py-16 md:py-28 w-full overflow-hidden">
+    <section className="relative pt-16 md:pt-28 pb-24 md:pb-32 w-full overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[rgba(0,240,255,0.1)] to-transparent" />
         <div className="absolute top-1/3 left-0 w-[40%] h-[600px] bg-[radial-gradient(ellipse,rgba(0,240,255,0.04)_0%,transparent_70%)]" />
@@ -243,7 +243,7 @@ export function GameShowcase() {
           </motion.div>
         </div>
 
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-6 md:gap-12 mb-16 md:mb-20">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-6 md:gap-12">
           <PhoneMockup
             src={menuImg}
             alt="Neon Dodge - Menu Screen"
@@ -258,6 +258,22 @@ export function GameShowcase() {
           />
         </div>
 
+      </div>
+
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] pointer-events-none">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-[60px] md:h-[80px]">
+          <path
+            d="M0,120 L0,60 Q300,0 600,60 Q900,120 1200,60 L1200,120 Z"
+            fill="currentColor"
+            className="text-background"
+          />
+          <path
+            d="M0,60 Q300,0 600,60 Q900,120 1200,60"
+            fill="none"
+            stroke="rgba(0,240,255,0.08)"
+            strokeWidth="1"
+          />
+        </svg>
       </div>
     </section>
   );

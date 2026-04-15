@@ -1,37 +1,53 @@
-import React from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
+import { motion } from 'framer-motion';
 import { SiInstagram, SiX } from 'react-icons/si';
-
 import logoLight from '@assets/Çalışma_Yüzeyi_7@2x_1776275353444.png';
 
 export function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="w-full bg-black py-12 px-6 md:px-12 border-t border-white/5 relative z-10">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-        
-        <div className="flex items-center gap-4">
-          <img src={logoLight} alt="TOOV Games" className="h-8 opacity-80" />
-        </div>
+    <footer className="relative w-full py-16 px-6 md:px-12 overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
 
-        <div className="text-white/40 text-sm md:text-base text-center md:text-left flex flex-col md:flex-row items-center gap-2 md:gap-4">
-          <span>© 2026 TOOV Games.</span>
-          <span className="hidden md:inline">|</span>
-          <span>{t("All rights reserved.", "Tüm hakları saklıdır.")}</span>
-          <span className="hidden md:inline">|</span>
-          <span className="text-primary/80">{t("Games are art.", "Oyunlar sanattır.")}</span>
-        </div>
+      <div className="max-w-[1400px] mx-auto">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-10">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex items-center"
+          >
+            <img src={logoLight} alt="TOOV Games" className="h-7 opacity-50" />
+          </motion.div>
 
-        <div className="flex items-center gap-6">
-          <a href="#" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300">
-            <SiInstagram size={20} />
-          </a>
-          <a href="#" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300">
-            <SiX size={20} />
-          </a>
-        </div>
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-[12px] text-white/25 tracking-wider">
+            <span>&copy; 2026 TOOV Games</span>
+            <span className="hidden md:inline text-white/10">|</span>
+            <span>{t('All rights reserved.', 'Tum haklari saklidir.')}</span>
+            <span className="hidden md:inline text-white/10">|</span>
+            <span className="text-neon-coral/40">
+              {t('Games are art.', 'Oyunlar sanattir.')}
+            </span>
+          </div>
 
+          <div className="flex items-center gap-5">
+            <a
+              data-testid="link-instagram"
+              href="#"
+              className="text-white/20 hover:text-white/60 transition-colors duration-300"
+            >
+              <SiInstagram size={16} />
+            </a>
+            <a
+              data-testid="link-twitter"
+              href="#"
+              className="text-white/20 hover:text-white/60 transition-colors duration-300"
+            >
+              <SiX size={16} />
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );

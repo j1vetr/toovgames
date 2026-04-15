@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useCallback } from 'react';
 
 type Language = 'EN' | 'TR';
 
@@ -13,9 +13,9 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>('EN');
 
-  const t = (en: string, tr: string) => {
+  const t = useCallback((en: string, tr: string) => {
     return language === 'EN' ? en : tr;
-  };
+  }, [language]);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>

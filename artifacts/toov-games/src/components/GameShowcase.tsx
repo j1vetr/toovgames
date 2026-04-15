@@ -1,14 +1,60 @@
-import React, { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
-import { motion } from 'framer-motion';
-
+import { motion, useScroll, useTransform } from 'framer-motion';
 import gameplayImg from '@assets/WhatsApp_Image_2026-04-15_at_20.50.50_1776275500060.jpeg';
 import menuImg from '@assets/WhatsApp_Image_2026-04-15_at_20.50.51_1776275500060.jpeg';
+
+function PhoneMockup({
+  src,
+  alt,
+  className = '',
+  glowColor = 'cyan',
+  delay = 0,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  glowColor?: 'cyan' | 'magenta';
+  delay?: number;
+}) {
+  const glowStyles =
+    glowColor === 'cyan'
+      ? 'shadow-[0_0_60px_rgba(0,240,255,0.15),0_0_120px_rgba(0,240,255,0.05)] hover:shadow-[0_0_80px_rgba(0,240,255,0.25),0_0_160px_rgba(0,240,255,0.1)]'
+      : 'shadow-[0_0_60px_rgba(255,0,144,0.15),0_0_120px_rgba(255,0,144,0.05)] hover:shadow-[0_0_80px_rgba(255,0,144,0.25),0_0_160px_rgba(255,0,144,0.1)]';
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 60, rotateY: glowColor === 'cyan' ? -8 : 8 }}
+      whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+      viewport={{ once: true, margin: '-10%' }}
+      transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
+      className={`${className}`}
+      style={{ perspective: 1000 }}
+    >
+      <div
+        className={`phone-mockup phone-mockup-lg transition-shadow duration-700 ${glowStyles}`}
+      >
+        <div className="phone-screen">
+          <img src={src} alt={alt} className="w-full h-full object-cover" />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export function GameShowcase() {
   const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const titleX = useTransform(scrollYProgress, [0, 0.3], [-60, 0]);
+  const titleOpacity = useTransform(scrollYProgress, [0.05, 0.2], [0, 1]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,101 +66,122 @@ export function GameShowcase() {
   };
 
   return (
-    <section className="relative py-32 w-full bg-black overflow-hidden border-t border-white/5">
-      {/* Dynamic Background Elements */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[150px] opacity-50" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-magenta/10 rounded-full blur-[150px] opacity-50" />
-      
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        <div className="text-center mb-20">
+    <section ref={sectionRef} className="relative py-24 md:py-40 w-full overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[rgba(0,240,255,0.1)] to-transparent" />
+        <div className="absolute top-1/3 left-0 w-[40%] h-[600px] bg-[radial-gradient(ellipse,rgba(0,240,255,0.04)_0%,transparent_70%)]" />
+        <div className="absolute bottom-1/4 right-0 w-[40%] h-[600px] bg-[radial-gradient(ellipse,rgba(255,0,144,0.04)_0%,transparent_70%)]" />
+      </div>
+
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
+        <div className="mb-16 md:mb-24">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="inline-block border border-accent/30 bg-accent/5 px-4 py-1.5 rounded-full text-accent text-sm font-mono tracking-widest mb-6"
+            transition={{ duration: 0.8 }}
+            className="flex items-center gap-4 mb-6"
           >
-            {t("FIRST TITLE", "İLK OYUN")}
+            <div className="w-12 h-px bg-neon-cyan" />
+            <span className="text-[11px] tracking-[0.3em] text-neon-cyan/60 uppercase font-semibold">
+              {t('First Release', 'Ilk Oyun')}
+            </span>
           </motion.div>
-          
-          <motion.h2 
-            initial={{ opacity: 0, y: 30 }}
+
+          <motion.h2
+            style={{ x: titleX, opacity: titleOpacity }}
+            className="font-display text-5xl md:text-7xl lg:text-[6rem] font-extrabold tracking-[-0.04em] leading-[0.9]"
+          >
+            <span className="glitch-text text-glow-cyan" data-text="NEON">
+              NEON
+            </span>
+            <br />
+            <span className="glitch-text text-glow-magenta" data-text="EDGE">
+              EDGE
+            </span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-display font-black text-white uppercase tracking-tighter"
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="mt-6 text-lg md:text-xl text-white/40 max-w-xl font-light"
           >
-            NEON <span className="text-accent text-shadow-neon-accent">EDGE</span>
-          </motion.h2>
-          
-          <motion.p 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="mt-6 text-xl md:text-2xl text-white/60 font-light max-w-2xl mx-auto"
-          >
-            {t("Survive the Neon. Dodge or die.", "Neon'dan kaç. Dodge et ya da öl.")}
+            {t(
+              'Survive the Neon. A fast-paced 2D dodge game set in the depths of space. Reflexes over strategy. Speed over power.',
+              'Neondan kac. Uzayin derinliklerinde gecen hizli tempolu bir 2D kacis oyunu. Strateji degil refleks. Guc degil hiz.'
+            )}
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 mb-24">
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="relative group rounded-xl overflow-hidden border border-white/10 aspect-video"
-          >
-            <div className="absolute inset-0 bg-accent/20 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-500" />
-            <img src={menuImg} alt="Neon Edge Menu" className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700" />
-            <div className="absolute inset-0 shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] z-20" />
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="relative group rounded-xl overflow-hidden border border-white/10 aspect-video lg:translate-y-12"
-          >
-            <div className="absolute inset-0 bg-magenta/20 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-500" />
-            <img src={gameplayImg} alt="Neon Edge Gameplay" className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700" />
-            <div className="absolute inset-0 shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] z-20" />
-          </motion.div>
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 md:gap-16 mb-24 md:mb-32">
+          <PhoneMockup
+            src={menuImg}
+            alt="Neon Edge - Menu Screen"
+            glowColor="cyan"
+            delay={0}
+          />
+          <PhoneMockup
+            src={gameplayImg}
+            alt="Neon Edge - Gameplay"
+            glowColor="magenta"
+            delay={0.2}
+            className="lg:mt-24"
+          />
         </div>
 
-        {/* Notify Form */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-xl mx-auto bg-white/5 border border-white/10 p-8 md:p-12 rounded-2xl backdrop-blur-md relative overflow-hidden"
+          transition={{ duration: 0.8 }}
+          className="max-w-2xl mx-auto"
         >
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-magenta" />
-          
-          <h3 className="text-2xl font-display font-bold text-white mb-2">
-            {t("Coming Soon", "Yakında")}
-          </h3>
-          <p className="text-white/60 mb-8">
-            {t("Get notified when Neon Edge launches.", "Neon Edge çıktığında haberdar ol.")}
-          </p>
+          <div className="relative p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-cyan/30 to-transparent" />
+            <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-magenta/20 to-transparent" />
 
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
-            <input 
-              type="email" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder={t("Enter your email...", "E-posta adresiniz...")}
-              required
-              className="flex-1 bg-black/50 border border-white/20 rounded-lg px-6 py-4 text-white focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-300"
-            />
-            <button 
-              type="submit"
-              className="relative px-8 py-4 bg-primary text-white font-bold tracking-wider rounded-lg overflow-hidden group"
-            >
-              <span className="relative z-10">{submitted ? t("Done!", "Eklendi!") : t("Notify Me", "Haberdar Et")}</span>
-              <div className="absolute inset-0 bg-white/20 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
-            </button>
-          </form>
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-2 h-2 rounded-full bg-neon-coral animate-pulse" />
+              <span className="text-[11px] tracking-[0.3em] text-white/30 uppercase font-semibold">
+                {t('Coming Soon', 'Yakinda')}
+              </span>
+            </div>
+
+            <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
+              {t('Be the first to play', 'Ilk oynayan sen ol')}
+            </h3>
+            <p className="text-white/40 mb-8 text-sm">
+              {t(
+                'Drop your email. We will notify you when Neon Edge launches.',
+                'E-posta adresini birak. Neon Edge ciktiginda seni haberdar edelim.'
+              )}
+            </p>
+
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3" data-testid="form-notify">
+              <input
+                data-testid="input-email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={t('your@email.com', 'senin@email.com')}
+                required
+                className="flex-1 bg-white/[0.03] border border-white/[0.08] rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-neon-cyan/40 focus:ring-1 focus:ring-neon-cyan/20 transition-all duration-300"
+              />
+              <button
+                data-testid="button-notify"
+                type="submit"
+                className="relative px-8 py-3.5 bg-white text-black text-sm font-semibold tracking-wide rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]"
+              >
+                <span className="relative z-10">
+                  {submitted
+                    ? t('Done!', 'Tamam!')
+                    : t('Notify Me', 'Haberdar Et')}
+                </span>
+              </button>
+            </form>
+          </div>
         </motion.div>
       </div>
     </section>

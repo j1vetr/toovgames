@@ -1,73 +1,117 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
-import { motion, useScroll, useTransform } from 'framer-motion';
-
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import mascotOutline from '@assets/Çalışma_Yüzeyi_9@2x_1776275353446.png';
+
+const wordVariants = {
+  hidden: { opacity: 0, y: 20, filter: 'blur(4px)' },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { delay: i * 0.03, duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+  }),
+};
+
+function AnimatedParagraph({ text, className }: { text: string; className?: string }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-15%' });
+  const words = text.split(' ');
+
+  return (
+    <p ref={ref} className={className}>
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          custom={i}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={wordVariants}
+          className="inline-block mr-[0.3em]"
+        >
+          {word}
+        </motion.span>
+      ))}
+    </p>
+  );
+}
 
 export function About() {
   const { t } = useLanguage();
-  const containerRef = useRef<HTMLDivElement>(null);
-  
+  const sectionRef = useRef<HTMLDivElement>(null);
+
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start']
+    target: sectionRef,
+    offset: ['start end', 'end start'],
   });
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [0, 1, 1, 0]);
+  const mascotY = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const mascotRotate = useTransform(scrollYProgress, [0, 1], [-5, 5]);
+
+  const aboutText = t(
+    'We started with a few lines of code and infinite imagination. TOOV Games was built by a team who believes in the magic of 2D games, for players. We design fluid, dynamic, and challenging experiences for those tired of complex worlds. In every game we develop, we listen to our community, shaping our games with their feedback.',
+    'Birkac satir kod ve sonsuz bir hayal gucuyle basladik. TOOV Games, 2D oyunlarin buyusune inanan bir ekip tarafindan, oyuncular icin kuruldu. Karmasik dunyalardan sikilanlar icin akici, dinamik ve bir o kadar da meydan okuyucu deneyimler tasarliyoruz. Gelistirdigimiz her oyunda toplulugumuzun sesini dinliyor, oyunlarimizi bu geri bildirimlerle sekillendiriyoruz.'
+  );
+
+  const quoteText = t(
+    'For us, gaming is not just a hobby \u2014 it is a form of art.',
+    'Oyun bizce sadece bir hobi degil, bir sanat formudur.'
+  );
 
   return (
-    <section ref={containerRef} className="relative min-h-screen w-full py-32 flex items-center bg-background z-10">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(232,87,58,0.05),transparent_70%)]" />
-      
-      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
-        <motion.div 
-          style={{ opacity, y: y1 }}
-          className="relative"
-        >
-          <img 
-            src={mascotOutline} 
-            alt="Mascot Outline" 
-            className="w-full max-w-md mx-auto opacity-30 invert" 
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-        </motion.div>
+    <section ref={sectionRef} className="relative py-32 md:py-48 w-full overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.03] to-transparent" />
+      </div>
 
-        <motion.div 
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-20%" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="space-y-8"
-        >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white tracking-tight">
-            <span className="text-primary block mb-2">ART.</span>
-            CODE.
-            <br />
-            <span className="text-white/50 block mt-2">MAGIC.</span>
-          </h2>
-          
-          <div className="w-16 h-1 bg-accent" />
-          
-          <p className="text-lg md:text-xl leading-relaxed text-white/80 font-light">
-            {t(
-              "We started with a few lines of code and infinite imagination. TOOV Games is a team built for players, who believes in the magic of 2D games.",
-              "Birkaç satır kod ve sonsuz bir hayal gücüyle başladık. TOOV Games, 2D oyunların büyüsüne inanan bir ekip tarafından, oyuncular için kuruldu."
-            )}
-          </p>
-          <p className="text-lg md:text-xl leading-relaxed text-white/80 font-light">
-            {t(
-              "We design fluid, dynamic, and challenging experiences for those tired of complex worlds. In every game we develop, we listen to our community, shaping our games with their feedback.",
-              "Karmaşık dünyalardan sıkılanlar için akıcı, dinamik ve bir o kadar da meydan okuyucu deneyimler tasarlıyoruz. Geliştirdiğimiz her oyunda topluluğumuzun sesini dinliyor, oyunlarımızı bu geri bildirimlerle şekillendiriyoruz."
-            )}
-          </p>
-          <p className="text-xl md:text-2xl text-white font-medium italic border-l-4 border-primary pl-6 py-2">
-            {t(
-              "For us, gaming is not just a hobby — it is a form of art.",
-              "Oyun bizce sadece bir hobi değil, bir sanat formudur."
-            )}
-          </p>
-        </motion.div>
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
+          <motion.div
+            style={{ y: mascotY, rotate: mascotRotate }}
+            className="lg:col-span-4 flex justify-center lg:justify-start relative"
+          >
+            <div className="relative">
+              <img
+                src={mascotOutline}
+                alt="TOOV Mascot"
+                className="w-48 md:w-64 opacity-[0.07] select-none"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+            </div>
+          </motion.div>
+
+          <div className="lg:col-span-8 space-y-10">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-15%' }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="flex items-center gap-4 mb-4"
+            >
+              <div className="w-12 h-px bg-neon-coral" />
+              <span className="text-[11px] tracking-[0.3em] text-white/30 uppercase font-semibold">
+                {t('Our Story', 'Hikayemiz')}
+              </span>
+            </motion.div>
+
+            <AnimatedParagraph
+              text={aboutText}
+              className="text-lg md:text-2xl leading-relaxed text-white/70 font-light"
+            />
+
+            <motion.blockquote
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="relative pl-6 border-l-2 border-neon-coral/50"
+            >
+              <p className="text-xl md:text-2xl font-display font-semibold text-white/90 italic">
+                "{quoteText}"
+              </p>
+            </motion.blockquote>
+          </div>
+        </div>
       </div>
     </section>
   );

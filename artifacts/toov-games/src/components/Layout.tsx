@@ -5,6 +5,7 @@ import { About } from './About';
 import { GameShowcase } from './GameShowcase';
 import { FutureTeaser } from './FutureTeaser';
 import { Footer } from './Footer';
+import { ScrollMascot } from './ScrollMascot';
 
 export function Layout() {
   return (
@@ -12,6 +13,7 @@ export function Layout() {
       <div className="min-h-[100dvh] w-full relative">
         <div className="grain-overlay" />
         <Navbar />
+        <ScrollMascot />
         <main>
           <Hero />
           <About />

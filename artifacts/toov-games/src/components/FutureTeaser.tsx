@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import mascotWhite from '@assets/Çalışma_Yüzeyi_10@2x_1776275353447.png';
+import mascotWhite from '@assets/mascot-white.svg';
 
 export function FutureTeaser() {
   const { t } = useLanguage();
@@ -34,7 +34,7 @@ export function FutureTeaser() {
             src={mascotWhite}
             alt="Mystery"
             className="w-24 h-24 md:w-36 md:h-36 mx-auto select-none"
-            style={{ opacity: 0.35, filter: 'brightness(1.8) drop-shadow(0 0 20px rgba(255,255,255,0.15))' }}
+            style={{ opacity: 0.3, filter: 'brightness(1.8) drop-shadow(0 0 20px rgba(255,255,255,0.15))' }}
             animate={{ y: [0, -12, 0] }}
             transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
           />

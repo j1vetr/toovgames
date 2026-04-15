@@ -1,7 +1,7 @@
 import { useLanguage } from '@/lib/LanguageContext';
 import { motion } from 'framer-motion';
 import { SiInstagram, SiX } from 'react-icons/si';
-import logoLight from '@assets/Çalışma_Yüzeyi_7@2x_1776275353444.png';
+import logoHorizontal from '@assets/logo-horizontal-white.svg';
 
 export function Footer() {
   const { t } = useLanguage();
@@ -18,7 +18,7 @@ export function Footer() {
             viewport={{ once: true }}
             className="flex items-center"
           >
-            <img src={logoLight} alt="TOOV Games" className="h-7 opacity-50" />
+            <img src={logoHorizontal} alt="TOOV Games" className="h-7 opacity-50" />
           </motion.div>
 
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-[12px] text-white/25 tracking-wider">

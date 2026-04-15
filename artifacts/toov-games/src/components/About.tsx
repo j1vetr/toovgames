@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import mascotOutline from '@assets/Çalışma_Yüzeyi_9@2x_1776275353446.png';
+import mascotWhite from '@assets/mascot-white.svg';
 
 const wordVariants = {
   hidden: { opacity: 0, y: 20, filter: 'blur(4px)' },
@@ -72,10 +72,9 @@ export function About() {
           >
             <div className="relative">
               <img
-                src={mascotOutline}
+                src={mascotWhite}
                 alt="TOOV Mascot"
-                className="w-48 md:w-64 select-none opacity-30 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
-                style={{ filter: 'brightness(1.5) contrast(1.2)' }}
+                className="w-48 md:w-64 select-none opacity-25 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
               />
             </div>
           </motion.div>

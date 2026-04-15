@@ -2,7 +2,7 @@ import { useEffect, useRef, useCallback } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import gsap from 'gsap';
-import mascotColor from '@assets/Çalışma_Yüzeyi_8@2x_1776275353445.png';
+import mascotColor from '@assets/mascot-color.svg';
 
 export function Hero() {
   const { t } = useLanguage();

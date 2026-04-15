@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import logoLight from '@assets/Çalışma_Yüzeyi_7@2x_1776275353444.png';
+import logoHorizontal from '@assets/logo-horizontal-white.svg';
 
 export function Navbar() {
   const { language, setLanguage } = useLanguage();
@@ -31,9 +31,9 @@ export function Navbar() {
           transition={{ duration: 0.2 }}
         >
           <img
-            src={logoLight}
+            src={logoHorizontal}
             alt="TOOV Games"
-            className={`object-contain transition-all duration-500 ${scrolled ? 'h-7' : 'h-9'}`}
+            className={`object-contain transition-all duration-500 opacity-80 ${scrolled ? 'h-7' : 'h-9'}`}
           />
         </motion.div>
 

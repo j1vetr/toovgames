@@ -34,7 +34,7 @@ One-page cinematic website for TOOV Games — a 2D indie game studio.
 - Bilingual EN/TR with language toggle (proper Unicode: ş, ç, ğ, ı, ö, ü, İ)
 - Lottie preloader (white bg, mascot animation, plays once)
 - Dark neon aesthetic with scroll-triggered GSAP animations
-- "NEON EDGE" game showcase with phone mockups and Play Store badge
+- "NEON DODGE" game showcase with phone mockups and Play Store badge
 - Framer Motion entrance animations + GSAP floating on Hero mascot
 
 ### Key Architecture Notes
@@ -44,4 +44,5 @@ One-page cinematic website for TOOV Games — a 2D indie game studio.
 - **Favicon**: `public/favicon.png` (mascot head PNG)
 - **CSS custom properties**: space-separated HSL, no `hsl()` wrapper
 - **Social**: Instagram only (`https://instagram.com/toov.games`), no Twitter/X
-- **GameShowcase**: GSAP ScrollTrigger stagger for NEON EDGE letters, Play Store "Coming soon" badge
+- **GameShowcase**: GSAP ScrollTrigger stagger for NEON DODGE letters, Play Store "Coming soon" badge
+- **SEO**: Full meta tags (OG, Twitter Card, theme-color, apple-mobile), JSON-LD structured data (Organization, WebSite, WebPage, VideoGame), canonical URL at toovgames.com

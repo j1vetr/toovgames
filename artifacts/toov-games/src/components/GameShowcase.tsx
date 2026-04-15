@@ -104,7 +104,7 @@ export function GameShowcase() {
   }, []);
 
   const neonWord = 'NEON';
-  const edgeWord = 'EDGE';
+  const dodgeWord = 'DODGE';
 
   return (
     <section className="relative py-24 md:py-40 w-full overflow-hidden">
@@ -143,7 +143,7 @@ export function GameShowcase() {
               ))}
             </div>
             <div>
-              {edgeWord.split('').map((letter, i) => (
+              {dodgeWord.split('').map((letter, i) => (
                 <span
                   key={`e-${i}`}
                   className="neon-letter inline-block text-glow-magenta"
@@ -164,7 +164,7 @@ export function GameShowcase() {
           >
             {t(
               'Survive the Neon. A fast-paced 2D dodge game set in the depths of space. Reflexes over strategy. Speed over power.',
-              'Neondan kaç. Uzayın derinliklerinde geçen hız dolu bir 2D kaçış oyunu. Strateji değil refleks. Güç değil hız.'
+              'Neon\'dan kaç. Uzayın derinliklerinde geçen hız dolu bir 2D kaçış oyunu. Strateji değil refleks. Güç değil hız.'
             )}
           </motion.p>
 
@@ -182,13 +182,13 @@ export function GameShowcase() {
         <div className="flex flex-col lg:flex-row items-center justify-center gap-8 md:gap-16 mb-24 md:mb-32">
           <PhoneMockup
             src={menuImg}
-            alt="Neon Edge - Menu Screen"
+            alt="Neon Dodge - Menu Screen"
             glowColor="cyan"
             delay={0}
           />
           <PhoneMockup
             src={gameplayImg}
-            alt="Neon Edge - Gameplay"
+            alt="Neon Dodge - Gameplay"
             glowColor="magenta"
             delay={0.2}
             className="lg:mt-24"

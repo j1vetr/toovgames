@@ -8,6 +8,23 @@ import menuImg from '@assets/WhatsApp_Image_2026-04-15_at_20.50.51_1776275500060
 
 gsap.registerPlugin(ScrollTrigger);
 
+function PlayStoreBadge({ className = '' }: { className?: string }) {
+  return (
+    <div className={`inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm ${className}`}>
+      <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="none">
+        <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92z" fill="#4285F4"/>
+        <path d="M17.556 8.236l-3.764 3.764 3.764 3.764 4.252-2.428a1 1 0 0 0 0-1.736l-4.252-2.364z" fill="#FBBC04"/>
+        <path d="M3.609 1.814L13.792 12l3.764-3.764L6.727.518a1.084 1.084 0 0 0-1.073.036 1 1 0 0 0-.045.026l-.001.001.001-.001v.001l-.001.001.001.252z" fill="#34A853"/>
+        <path d="M13.792 12L3.61 22.186l.001.001-.001.001v-.001l.001.001a1 1 0 0 0 .045.026 1.084 1.084 0 0 0 1.073.036l10.829-5.486L13.792 12z" fill="#EA4335"/>
+      </svg>
+      <div className="flex flex-col">
+        <span className="text-[9px] tracking-wider text-white/40 uppercase leading-tight">Coming soon on</span>
+        <span className="text-sm font-semibold text-white/80 leading-tight">Google Play</span>
+      </div>
+    </div>
+  );
+}
+
 function PhoneMockup({
   src,
   alt,
@@ -150,6 +167,16 @@ export function GameShowcase() {
               'Neondan kaç. Uzayın derinliklerinde geçen hız dolu bir 2D kaçış oyunu. Strateji değil refleks. Güç değil hız.'
             )}
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.7, duration: 0.8 }}
+            className="mt-10"
+          >
+            <PlayStoreBadge />
+          </motion.div>
         </div>
 
         <div className="flex flex-col lg:flex-row items-center justify-center gap-8 md:gap-16 mb-24 md:mb-32">

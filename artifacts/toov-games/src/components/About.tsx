@@ -54,7 +54,7 @@ export function About() {
   );
 
   const quoteText = t(
-    'For us, gaming is not just a hobby - it is a form of art.',
+    'For us, gaming is not just a hobby, it is a form of art.',
     'Bizim için oyun sadece bir hobi değil, başlı başına bir sanat.'
   );
 

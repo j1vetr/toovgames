@@ -136,18 +136,20 @@ export function Hero() {
         style={{ y: bgY, opacity: contentOpacity, scale: contentScale }}
         className="relative z-10 flex flex-col items-center justify-center w-full max-w-5xl px-6 text-center"
       >
-        <div className="mb-6 md:mb-10 relative">
-          <motion.img
+        <motion.div
+          className="mb-6 md:mb-10 relative"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+        >
+          <img
             ref={mascotImgRef}
             src={mascotColor}
             alt="TOOV Mascot"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             className="w-24 md:w-36 lg:w-44 object-contain relative z-10 drop-shadow-[0_0_40px_rgba(232,87,58,0.4)]"
           />
           <div className="absolute inset-0 scale-[2.5] bg-[radial-gradient(circle,rgba(232,87,58,0.15)_0%,transparent_60%)] z-0" />
-        </div>
+        </motion.div>
 
         <motion.div
           initial={{ y: 60, opacity: 0 }}

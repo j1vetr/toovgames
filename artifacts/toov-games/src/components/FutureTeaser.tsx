@@ -14,6 +14,7 @@ export function FutureTeaser() {
 
   const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+
   return (
     <section
       ref={sectionRef}
@@ -28,14 +29,16 @@ export function FutureTeaser() {
         style={{ scale, opacity }}
         className="relative z-10 text-center max-w-3xl px-6"
       >
-        <div className="mb-12">
+        <div className="mb-12 relative">
           <motion.img
             src={mascotWhite}
             alt="Mystery"
-            className="w-20 h-20 md:w-28 md:h-28 mx-auto opacity-[0.08] select-none"
-            animate={{ y: [0, -10, 0] }}
+            className="w-24 h-24 md:w-36 md:h-36 mx-auto select-none"
+            style={{ opacity: 0.35, filter: 'brightness(1.8) drop-shadow(0 0 20px rgba(255,255,255,0.15))' }}
+            animate={{ y: [0, -12, 0] }}
             transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
           />
+          <div className="absolute inset-0 scale-[2] bg-[radial-gradient(circle,rgba(255,255,255,0.03)_0%,transparent_60%)]" />
         </div>
 
         <motion.div

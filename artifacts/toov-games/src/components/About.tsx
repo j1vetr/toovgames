@@ -74,9 +74,9 @@ export function About() {
               <img
                 src={mascotOutline}
                 alt="TOOV Mascot"
-                className="w-48 md:w-64 opacity-[0.07] select-none"
+                className="w-48 md:w-64 select-none opacity-30 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+                style={{ filter: 'brightness(1.5) contrast(1.2)' }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
             </div>
           </motion.div>
 

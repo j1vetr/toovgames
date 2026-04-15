@@ -1,8 +1,12 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gameplayImg from '@assets/WhatsApp_Image_2026-04-15_at_20.50.50_1776275500060.jpeg';
 import menuImg from '@assets/WhatsApp_Image_2026-04-15_at_20.50.51_1776275500060.jpeg';
+
+gsap.registerPlugin(ScrollTrigger);
 
 function PhoneMockup({
   src,
@@ -46,27 +50,65 @@ export function GameShowcase() {
   const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
-  const titleX = useTransform(scrollYProgress, [0, 0.3], [-60, 0]);
-  const titleOpacity = useTransform(scrollYProgress, [0.05, 0.2], [0, 1]);
+  useEffect(() => {
+    if (!titleRef.current) return;
+    const letters = titleRef.current.querySelectorAll('.neon-letter');
+    
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: titleRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+      },
+    });
+
+    tl.fromTo(
+      letters,
+      { opacity: 0, y: 80, rotationX: -90, scale: 0.5 },
+      {
+        opacity: 1,
+        y: 0,
+        rotationX: 0,
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.05,
+        ease: 'back.out(1.7)',
+      }
+    );
+
+    tl.to(letters, {
+      textShadow: '0 0 20px rgba(0,240,255,0.8), 0 0 60px rgba(0,240,255,0.4), 0 0 100px rgba(0,240,255,0.2)',
+      duration: 0.4,
+      stagger: 0.03,
+      ease: 'power2.inOut',
+    }, '-=0.3');
+
+    return () => { tl.kill(); };
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
       setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 3000);
+      timeoutRef.current = setTimeout(() => setSubmitted(false), 3000);
       setEmail('');
     }
   };
 
+  const neonWord = 'NEON';
+  const edgeWord = 'EDGE';
+
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-40 w-full overflow-hidden">
+    <section className="relative py-24 md:py-40 w-full overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[rgba(0,240,255,0.1)] to-transparent" />
         <div className="absolute top-1/3 left-0 w-[40%] h-[600px] bg-[radial-gradient(ellipse,rgba(0,240,255,0.04)_0%,transparent_70%)]" />
@@ -74,39 +116,52 @@ export function GameShowcase() {
       </div>
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
-        <div className="mb-16 md:mb-24">
+        <div className="mb-16 md:mb-24 text-center">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="flex items-center gap-4 mb-6"
+            className="flex items-center justify-center gap-4 mb-8"
           >
             <div className="w-12 h-px bg-neon-cyan" />
             <span className="text-[11px] tracking-[0.3em] text-neon-cyan/60 uppercase font-semibold">
               {t('First Release', 'Ilk Oyun')}
             </span>
+            <div className="w-12 h-px bg-neon-cyan" />
           </motion.div>
 
-          <motion.h2
-            style={{ x: titleX, opacity: titleOpacity }}
-            className="font-display text-5xl md:text-7xl lg:text-[6rem] font-extrabold tracking-[-0.04em] leading-[0.9]"
-          >
-            <span className="glitch-text text-glow-cyan" data-text="NEON">
-              NEON
-            </span>
-            <br />
-            <span className="glitch-text text-glow-magenta" data-text="EDGE">
-              EDGE
-            </span>
-          </motion.h2>
+          <div ref={titleRef} className="font-display text-5xl md:text-7xl lg:text-[7rem] font-extrabold tracking-[-0.02em] leading-[0.9]" style={{ perspective: 600 }}>
+            <div className="mb-2">
+              {neonWord.split('').map((letter, i) => (
+                <span
+                  key={`n-${i}`}
+                  className="neon-letter inline-block text-glow-cyan"
+                  style={{ display: 'inline-block', color: '#00F0FF' }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </div>
+            <div>
+              {edgeWord.split('').map((letter, i) => (
+                <span
+                  key={`e-${i}`}
+                  className="neon-letter inline-block text-glow-magenta"
+                  style={{ display: 'inline-block', color: '#FF0090' }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </div>
+          </div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="mt-6 text-lg md:text-xl text-white/40 max-w-xl font-light"
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="mt-8 text-lg md:text-xl text-white/40 max-w-xl mx-auto font-light"
           >
             {t(
               'Survive the Neon. A fast-paced 2D dodge game set in the depths of space. Reflexes over strategy. Speed over power.',
@@ -142,22 +197,24 @@ export function GameShowcase() {
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-cyan/30 to-transparent" />
             <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-magenta/20 to-transparent" />
 
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-2 h-2 rounded-full bg-neon-coral animate-pulse" />
-              <span className="text-[11px] tracking-[0.3em] text-white/30 uppercase font-semibold">
-                {t('Coming Soon', 'Yakinda')}
-              </span>
-            </div>
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-3 mb-2">
+                <div className="w-2 h-2 rounded-full bg-neon-coral animate-pulse" />
+                <span className="text-[11px] tracking-[0.3em] text-white/30 uppercase font-semibold">
+                  {t('Coming Soon', 'Yakinda')}
+                </span>
+              </div>
 
-            <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
-              {t('Be the first to play', 'Ilk oynayan sen ol')}
-            </h3>
-            <p className="text-white/40 mb-8 text-sm">
-              {t(
-                'Drop your email. We will notify you when Neon Edge launches.',
-                'E-posta adresini birak. Neon Edge ciktiginda seni haberdar edelim.'
-              )}
-            </p>
+              <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
+                {t('Be the first to play', 'Ilk oynayan sen ol')}
+              </h3>
+              <p className="text-white/40 mb-8 text-sm">
+                {t(
+                  'Drop your email. We will notify you when Neon Edge launches.',
+                  'E-posta adresini birak. Neon Edge ciktiginda seni haberdar edelim.'
+                )}
+              </p>
+            </div>
 
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3" data-testid="form-notify">
               <input

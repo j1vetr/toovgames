@@ -8,7 +8,7 @@ export function Hero() {
   const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mascotRef = useRef<HTMLDivElement>(null);
+  const mascotImgRef = useRef<HTMLImageElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -57,7 +57,6 @@ export function Hero() {
         if (p.x > canvas.width) p.x = 0;
         if (p.y < 0) p.y = canvas.height;
         if (p.y > canvas.height) p.y = 0;
-
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = p.color + p.alpha + ')';
@@ -95,15 +94,33 @@ export function Hero() {
   }, [initCanvas]);
 
   useEffect(() => {
-    if (!mascotRef.current) return;
-    gsap.to(mascotRef.current, {
-      y: -15,
-      rotation: 2,
-      duration: 3,
+    if (!mascotImgRef.current) return;
+    const tl = gsap.timeline({ repeat: -1 });
+    tl.to(mascotImgRef.current, {
+      y: -18,
+      rotation: 3,
+      duration: 2.5,
       ease: 'sine.inOut',
-      yoyo: true,
-      repeat: -1,
     });
+    tl.to(mascotImgRef.current, {
+      y: 0,
+      rotation: -2,
+      duration: 2.5,
+      ease: 'sine.inOut',
+    });
+    tl.to(mascotImgRef.current, {
+      y: -10,
+      rotation: 1,
+      duration: 2,
+      ease: 'sine.inOut',
+    });
+    tl.to(mascotImgRef.current, {
+      y: 0,
+      rotation: 0,
+      duration: 2,
+      ease: 'sine.inOut',
+    });
+    return () => { tl.kill(); };
   }, []);
 
   return (
@@ -119,20 +136,18 @@ export function Hero() {
         style={{ y: bgY, opacity: contentOpacity, scale: contentScale }}
         className="relative z-10 flex flex-col items-center justify-center w-full max-w-5xl px-6 text-center"
       >
-        <motion.div
-          ref={mascotRef}
-          initial={{ scale: 0, opacity: 0, rotate: -10 }}
-          animate={{ scale: 1, opacity: 1, rotate: 0 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-          className="mb-6 md:mb-10 relative"
-        >
-          <img
+        <div className="mb-6 md:mb-10 relative">
+          <motion.img
+            ref={mascotImgRef}
             src={mascotColor}
             alt="TOOV Mascot"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             className="w-24 md:w-36 lg:w-44 object-contain relative z-10 drop-shadow-[0_0_40px_rgba(232,87,58,0.4)]"
           />
           <div className="absolute inset-0 scale-[2.5] bg-[radial-gradient(circle,rgba(232,87,58,0.15)_0%,transparent_60%)] z-0" />
-        </motion.div>
+        </div>
 
         <motion.div
           initial={{ y: 60, opacity: 0 }}
@@ -144,8 +159,14 @@ export function Hero() {
           </p>
 
           <h1 className="font-display text-[clamp(3rem,10vw,8rem)] font-extrabold leading-[0.85] tracking-[-0.04em] mb-6">
-            <span className="block text-white">TOOV</span>
-            <span className="block text-gradient-neon">GAMES</span>
+            <span className="block text-white drop-shadow-[0_0_60px_rgba(255,255,255,0.1)]">TOOV</span>
+            <span className="block" style={{
+              background: 'linear-gradient(135deg, #E8573A 0%, #FF0090 50%, #00F0FF 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              filter: 'drop-shadow(0 0 40px rgba(232,87,58,0.3))',
+            }}>GAMES</span>
           </h1>
 
           <p className="text-base md:text-xl text-white/50 max-w-lg mx-auto leading-relaxed font-light">

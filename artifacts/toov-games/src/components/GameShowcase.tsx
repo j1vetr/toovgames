@@ -3,7 +3,6 @@ import { useLanguage } from '@/lib/LanguageContext';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import gameplayImg from '@assets/WhatsApp_Image_2026-04-15_at_20.50.50_1776275500060.jpeg';
 import menuImg from '@assets/WhatsApp_Image_2026-04-15_at_20.50.51_1776275500060.jpeg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -57,6 +56,49 @@ function PhoneMockup({
       >
         <div className="phone-screen">
           <img src={src} alt={alt} className="w-full h-full object-cover" />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function VideoPhoneMockup({
+  videoSrc,
+  className = '',
+  glowColor = 'magenta',
+  delay = 0,
+}: {
+  videoSrc: string;
+  className?: string;
+  glowColor?: 'cyan' | 'magenta';
+  delay?: number;
+}) {
+  const glowStyles =
+    glowColor === 'cyan'
+      ? 'shadow-[0_0_60px_rgba(0,240,255,0.15),0_0_120px_rgba(0,240,255,0.05)] hover:shadow-[0_0_80px_rgba(0,240,255,0.25),0_0_160px_rgba(0,240,255,0.1)]'
+      : 'shadow-[0_0_60px_rgba(255,0,144,0.15),0_0_120px_rgba(255,0,144,0.05)] hover:shadow-[0_0_80px_rgba(255,0,144,0.25),0_0_160px_rgba(255,0,144,0.1)]';
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 60, rotateY: glowColor === 'cyan' ? -8 : 8 }}
+      whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+      viewport={{ once: true, margin: '-10%' }}
+      transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
+      className={`${className}`}
+      style={{ perspective: 1000 }}
+    >
+      <div
+        className={`phone-mockup phone-mockup-lg transition-shadow duration-700 ${glowStyles}`}
+      >
+        <div className="phone-screen">
+          <video
+            src={videoSrc}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          />
         </div>
       </div>
     </motion.div>
@@ -186,9 +228,8 @@ export function GameShowcase() {
             glowColor="cyan"
             delay={0}
           />
-          <PhoneMockup
-            src={gameplayImg}
-            alt="Neon Dodge - Gameplay"
+          <VideoPhoneMockup
+            videoSrc={`${import.meta.env.BASE_URL}neon-dodge-gameplay.mp4`}
             glowColor="magenta"
             delay={0.2}
             className="lg:mt-24"

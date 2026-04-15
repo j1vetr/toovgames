@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "TOOV Games"
+version = "1.0.0"
+id = "artifacts/toov-games"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21823
+
+[services.development]
+run = "pnpm --filter @workspace/toov-games run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/toov-games", "run", "build" ]
+publicDir = "artifacts/toov-games/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21823"
+BASE_PATH = "/"

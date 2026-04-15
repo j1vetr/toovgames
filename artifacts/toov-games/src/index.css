@@ -262,8 +262,8 @@
 }
 
 .phone-mockup-lg {
-  width: 320px;
-  height: 650px;
+  width: 260px;
+  height: 530px;
 }
 
 @media (max-width: 768px) {
@@ -282,8 +282,8 @@
     border-radius: 20px;
   }
   .phone-mockup-lg {
-    width: 240px;
-    height: 490px;
+    width: 200px;
+    height: 410px;
   }
 }
 

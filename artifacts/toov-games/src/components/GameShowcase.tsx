@@ -171,7 +171,7 @@ export function GameShowcase() {
   const dodgeWord = 'DODGE';
 
   return (
-    <section className="relative py-24 md:py-40 w-full overflow-hidden">
+    <section className="relative py-16 md:py-28 w-full overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[rgba(0,240,255,0.1)] to-transparent" />
         <div className="absolute top-1/3 left-0 w-[40%] h-[600px] bg-[radial-gradient(ellipse,rgba(0,240,255,0.04)_0%,transparent_70%)]" />
@@ -179,7 +179,7 @@ export function GameShowcase() {
       </div>
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
-        <div className="mb-16 md:mb-24 text-center">
+        <div className="mb-12 md:mb-16 text-center">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -194,7 +194,7 @@ export function GameShowcase() {
             <div className="w-12 h-px bg-neon-cyan" />
           </motion.div>
 
-          <div ref={titleRef} className="font-display text-5xl md:text-7xl lg:text-[7rem] font-extrabold tracking-[-0.02em] leading-[0.9]" style={{ perspective: 600 }}>
+          <div ref={titleRef} className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.02em] leading-[0.9]" style={{ perspective: 600 }}>
             <div className="mb-2">
               {neonWord.split('').map((letter, i) => (
                 <span
@@ -224,7 +224,7 @@ export function GameShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="mt-8 text-lg md:text-xl text-white/40 max-w-xl mx-auto font-light"
+            className="mt-6 text-sm md:text-base text-white/40 max-w-lg mx-auto font-light"
           >
             {t(
               'Survive the Neon. A fast-paced 2D dodge game set in the depths of space. Reflexes over strategy. Speed over power.',
@@ -237,13 +237,13 @@ export function GameShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.7, duration: 0.8 }}
-            className="mt-10"
+            className="mt-8"
           >
             <PlayStoreBadge />
           </motion.div>
         </div>
 
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 md:gap-16 mb-24 md:mb-32">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-6 md:gap-12 mb-16 md:mb-20">
           <PhoneMockup
             src={menuImg}
             alt="Neon Dodge - Menu Screen"

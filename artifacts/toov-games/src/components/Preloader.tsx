@@ -1,10 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Lottie from 'lottie-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import preloaderData from '@assets/preloader-lottie.json';
 
 export function Preloader({ onComplete }: { onComplete: () => void }) {
   const [done, setDone] = useState(false);
+  const [animationData, setAnimationData] = useState<object | null>(null);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}preloader-lottie.json`)
+      .then(res => res.json())
+      .then(setAnimationData);
+  }, []);
+
+  if (!animationData) return null;
 
   return (
     <AnimatePresence>
@@ -19,7 +27,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
         >
           <div className="w-40 md:w-56">
             <Lottie
-              animationData={preloaderData}
+              animationData={animationData}
               loop={false}
               autoplay
               onComplete={() => setDone(true)}

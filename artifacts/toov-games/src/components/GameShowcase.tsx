@@ -73,6 +73,26 @@ function VideoPhoneMockup({
   glowColor?: 'cyan' | 'magenta';
   delay?: number;
 }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current || !videoRef.current) return;
+    const video = videoRef.current;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.src = videoSrc;
+          video.load();
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [videoSrc]);
+
   const glowStyles =
     glowColor === 'cyan'
       ? 'shadow-[0_0_60px_rgba(0,240,255,0.15),0_0_120px_rgba(0,240,255,0.05)] hover:shadow-[0_0_80px_rgba(0,240,255,0.25),0_0_160px_rgba(0,240,255,0.1)]'
@@ -80,6 +100,7 @@ function VideoPhoneMockup({
 
   return (
     <motion.div
+      ref={containerRef}
       initial={{ opacity: 0, y: 60, rotateY: glowColor === 'cyan' ? -8 : 8 }}
       whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
       viewport={{ once: true, margin: '-10%' }}
@@ -92,11 +113,12 @@ function VideoPhoneMockup({
       >
         <div className="phone-screen">
           <video
-            src={videoSrc}
+            ref={videoRef}
             autoPlay
             loop
             muted
             playsInline
+            preload="none"
             className="w-full h-full object-cover"
           />
         </div>

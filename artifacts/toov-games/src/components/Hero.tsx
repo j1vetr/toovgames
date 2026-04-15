@@ -35,7 +35,9 @@ export function Hero() {
     const particles: { x: number; y: number; vx: number; vy: number; size: number; alpha: number; color: string }[] = [];
     const colors = ['rgba(0,240,255,', 'rgba(255,0,144,', 'rgba(232,87,58,', 'rgba(255,255,255,'];
 
-    for (let i = 0; i < 120; i++) {
+    const isMobile = window.innerWidth < 768;
+    const count = isMobile ? 30 : 60;
+    for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -63,21 +65,6 @@ export function Hero() {
         ctx.fill();
       });
 
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 100) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(255,255,255,${0.03 * (1 - dist / 100)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
       animId = requestAnimationFrame(render);
     };
     render();

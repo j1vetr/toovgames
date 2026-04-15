@@ -1,6 +1,6 @@
 import { useLanguage } from '@/lib/LanguageContext';
 import { motion } from 'framer-motion';
-import { SiInstagram, SiX } from 'react-icons/si';
+import { SiInstagram } from 'react-icons/si';
 import logoHorizontal from '@assets/logo-horizontal-white.svg';
 
 export function Footer() {
@@ -34,17 +34,12 @@ export function Footer() {
           <div className="flex items-center gap-5">
             <a
               data-testid="link-instagram"
-              href="#"
+              href="https://instagram.com/toov.games"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-white/20 hover:text-white/60 transition-colors duration-300"
             >
               <SiInstagram size={16} />
-            </a>
-            <a
-              data-testid="link-twitter"
-              href="#"
-              className="text-white/20 hover:text-white/60 transition-colors duration-300"
-            >
-              <SiX size={16} />
             </a>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
@@ -48,16 +48,7 @@ function PhoneMockup({
 
 export function GameShowcase() {
   const { t } = useLanguage();
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
   const titleRef = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
-
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
 
   useEffect(() => {
     if (!titleRef.current) return;
@@ -94,15 +85,6 @@ export function GameShowcase() {
 
     return () => { tl.kill(); };
   }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      setSubmitted(true);
-      timeoutRef.current = setTimeout(() => setSubmitted(false), 3000);
-      setEmail('');
-    }
-  };
 
   const neonWord = 'NEON';
   const edgeWord = 'EDGE';
@@ -186,60 +168,6 @@ export function GameShowcase() {
           />
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-2xl mx-auto"
-        >
-          <div className="relative p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-cyan/30 to-transparent" />
-            <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-magenta/20 to-transparent" />
-
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-3 mb-2">
-                <div className="w-2 h-2 rounded-full bg-neon-coral animate-pulse" />
-                <span className="text-[11px] tracking-[0.3em] text-white/30 uppercase font-semibold">
-                  {t('Coming Soon', 'Yakinda')}
-                </span>
-              </div>
-
-              <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
-                {t('Be the first to play', 'Ilk oynayan sen ol')}
-              </h3>
-              <p className="text-white/40 mb-8 text-sm">
-                {t(
-                  'Drop your email. We will notify you when Neon Edge launches.',
-                  'E-posta adresini birak. Neon Edge ciktiginda seni haberdar edelim.'
-                )}
-              </p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3" data-testid="form-notify">
-              <input
-                data-testid="input-email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder={t('your@email.com', 'senin@email.com')}
-                required
-                className="flex-1 bg-white/[0.03] border border-white/[0.08] rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-neon-cyan/40 focus:ring-1 focus:ring-neon-cyan/20 transition-all duration-300"
-              />
-              <button
-                data-testid="button-notify"
-                type="submit"
-                className="relative px-8 py-3.5 bg-white text-black text-sm font-semibold tracking-wide rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]"
-              >
-                <span className="relative z-10">
-                  {submitted
-                    ? t('Done!', 'Tamam!')
-                    : t('Notify Me', 'Haberdar Et')}
-                </span>
-              </button>
-            </form>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

@@ -4,12 +4,18 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import menuImg from '@assets/WhatsApp_Image_2026-04-15_at_20.50.51_1776275500060.jpeg';
+import neonDodgeIcon from '@assets/logo_1024_1777902843317.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function PlayStoreBadge({ className = '' }: { className?: string }) {
   return (
-    <div className={`inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm ${className}`}>
+    <a
+      href="https://tinyurl.com/neondodge"
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`group inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.08] hover:border-neon-cyan/20 transition-all duration-300 ${className}`}
+    >
       <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="none">
         <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92z" fill="#4285F4"/>
         <path d="M17.556 8.236l-3.764 3.764 3.764 3.764 4.252-2.428a1 1 0 0 0 0-1.736l-4.252-2.364z" fill="#FBBC04"/>
@@ -17,9 +23,22 @@ function PlayStoreBadge({ className = '' }: { className?: string }) {
         <path d="M13.792 12L3.61 22.186l.001.001-.001.001v-.001l.001.001a1 1 0 0 0 .045.026 1.084 1.084 0 0 0 1.073.036l10.829-5.486L13.792 12z" fill="#EA4335"/>
       </svg>
       <div className="flex flex-col">
-        <span className="text-[9px] tracking-wider text-white/40 uppercase leading-tight">Coming soon on</span>
-        <span className="text-sm font-semibold text-white/80 leading-tight">Google Play</span>
+        <span className="text-[9px] tracking-wider text-white/40 uppercase leading-tight">Download on</span>
+        <span className="text-sm font-semibold text-white/80 leading-tight group-hover:text-white transition-colors">Google Play</span>
       </div>
+    </a>
+  );
+}
+
+function GameIcon({ className = '' }: { className?: string }) {
+  return (
+    <div className={`relative ${className}`}>
+      <img
+        src={neonDodgeIcon}
+        alt="Neon Dodge Icon"
+        className="w-20 h-20 md:w-24 md:h-24 rounded-2xl shadow-lg shadow-neon-cyan/10"
+      />
+      <div className="absolute inset-0 rounded-2xl ring-1 ring-white/10" />
     </div>
   );
 }
@@ -181,10 +200,20 @@ export function GameShowcase() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
         <div className="mb-12 md:mb-16 text-center">
           <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex justify-center mb-6"
+          >
+            <GameIcon />
+          </motion.div>
+
+          <motion.div
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="flex items-center justify-center gap-4 mb-8"
           >
             <div className="w-12 h-px bg-neon-cyan" />

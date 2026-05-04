@@ -191,7 +191,7 @@ function GameCard({ game, isActive, onClick }: { game: GameData; isActive: boole
           className={`w-12 h-12 md:w-14 md:h-14 rounded-xl transition-all duration-500 ${
             isActive ? 'shadow-lg scale-105' : 'opacity-60'
           }`}
-          style={isActive ? { boxShadow: `0 0 20px ${game.glowColor}` } : {}}
+          style={{}}
         />
       </div>
       <div className="text-left">

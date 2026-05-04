@@ -245,84 +245,102 @@ function GameContent({ game }: { game: GameData }) {
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="mb-10 md:mb-14 text-center">
-        <div
-          ref={titleRef}
-          className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.02em] leading-[0.9]"
-          style={{ perspective: 600 }}
-        >
-          <div className="mb-2">
-            {game.titleLine1.split('').map((letter, i) => (
-              <span
-                key={`l1-${game.id}-${i}`}
-                className="neon-letter inline-block"
-                style={{ display: 'inline-block', color: game.color1 }}
-              >
-                {letter}
-              </span>
-            ))}
-          </div>
-          <div>
-            {game.titleLine2.split('').map((letter, i) => (
-              <span
-                key={`l2-${game.id}-${i}`}
-                className="neon-letter inline-block"
-                style={{ display: 'inline-block', color: game.color2 }}
-              >
-                {letter}
-              </span>
-            ))}
-          </div>
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-6 xl:gap-10">
+        <div className="hidden lg:flex flex-shrink-0 justify-end">
+          <PhoneMockup
+            src={game.menuImg}
+            alt={`${game.titleLine1} ${game.titleLine2} - Menu`}
+            glowColor={game.glowColor}
+            delay={0}
+          />
         </div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="mt-6 text-sm md:text-base text-white/40 max-w-lg mx-auto font-light"
-        >
-          {t(game.descEn, game.descTr)}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="mt-8"
-        >
-          {game.storeUrl ? (
-            <a
-              href={game.storeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.08] transition-all duration-300"
-              style={{ ['--glow' as string]: game.color1 }}
-            >
-              <PlayStoreIcon />
-              <div className="flex flex-col">
-                <span className="text-[9px] tracking-wider text-white/40 uppercase leading-tight">
-                  {t(game.storeTextEn, game.storeTextTr)}
+        <div className="flex-1 max-w-xl text-center px-4">
+          <div
+            ref={titleRef}
+            className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-[-0.02em] leading-[0.9]"
+            style={{ perspective: 600 }}
+          >
+            <div className="mb-2">
+              {game.titleLine1.split('').map((letter, i) => (
+                <span
+                  key={`l1-${game.id}-${i}`}
+                  className="neon-letter inline-block"
+                  style={{ display: 'inline-block', color: game.color1 }}
+                >
+                  {letter}
                 </span>
-                <span className="text-sm font-semibold text-white/80 leading-tight group-hover:text-white transition-colors">
-                  Google Play
-                </span>
-              </div>
-            </a>
-          ) : (
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-              <PlayStoreIcon />
-              <div className="flex flex-col">
-                <span className="text-[9px] tracking-wider text-white/40 uppercase leading-tight">
-                  {t(game.storeTextEn, game.storeTextTr)}
-                </span>
-                <span className="text-sm font-semibold text-white/50 leading-tight">Google Play</span>
-              </div>
+              ))}
             </div>
-          )}
-        </motion.div>
+            <div>
+              {game.titleLine2.split('').map((letter, i) => (
+                <span
+                  key={`l2-${game.id}-${i}`}
+                  className="neon-letter inline-block"
+                  style={{ display: 'inline-block', color: game.color2 }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="mt-6 text-sm md:text-base text-white/40 max-w-md mx-auto font-light"
+          >
+            {t(game.descEn, game.descTr)}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="mt-10"
+          >
+            {game.storeUrl ? (
+              <a
+                href={game.storeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-4 px-8 py-4 rounded-2xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-300 hover:scale-[1.03]"
+              >
+                <PlayStoreIcon />
+                <div className="flex flex-col">
+                  <span className="text-[10px] tracking-wider text-white/40 uppercase leading-tight">
+                    {t(game.storeTextEn, game.storeTextTr)}
+                  </span>
+                  <span className="text-base font-semibold text-white/80 leading-tight group-hover:text-white transition-colors">
+                    Google Play
+                  </span>
+                </div>
+              </a>
+            ) : (
+              <div className="inline-flex items-center gap-4 px-8 py-4 rounded-2xl bg-white/[0.03] border border-white/[0.06]">
+                <PlayStoreIcon />
+                <div className="flex flex-col">
+                  <span className="text-[10px] tracking-wider text-white/40 uppercase leading-tight">
+                    {t(game.storeTextEn, game.storeTextTr)}
+                  </span>
+                  <span className="text-base font-semibold text-white/50 leading-tight">Google Play</span>
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </div>
+
+        <div className="hidden lg:flex flex-shrink-0 justify-start">
+          <VideoPhoneMockup
+            videoSrc={`${import.meta.env.BASE_URL}${game.videoSrc}`}
+            glowColor={game.glowColor}
+            delay={0.2}
+          />
+        </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-6 md:gap-12">
+      <div className="flex lg:hidden flex-col items-center gap-6 mt-10">
         <PhoneMockup
           src={game.menuImg}
           alt={`${game.titleLine1} ${game.titleLine2} - Menu`}
@@ -333,7 +351,6 @@ function GameContent({ game }: { game: GameData }) {
           videoSrc={`${import.meta.env.BASE_URL}${game.videoSrc}`}
           glowColor={game.glowColor}
           delay={0.2}
-          className="lg:mt-24"
         />
       </div>
     </motion.div>

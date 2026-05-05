@@ -178,7 +178,7 @@ function AppContent({ app }: { app: AppData }) {
             alt={`${app.titleLine1} ${app.titleLine2} - Detail`}
             glowColor={app.glowColor}
             delay={0}
-            tiltY={14}
+            tiltY={-14}
           />
         </div>
 
@@ -268,7 +268,7 @@ function AppContent({ app }: { app: AppData }) {
             alt={`${app.titleLine1} ${app.titleLine2} - Home`}
             glowColor={app.glowColor}
             delay={0.2}
-            tiltY={-14}
+            tiltY={14}
           />
         </div>
       </div>

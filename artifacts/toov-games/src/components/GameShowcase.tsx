@@ -85,7 +85,7 @@ function PhoneMockup({
   className = '',
   glowColor = 'cyan',
   delay = 0,
-  tiltY = 14,
+  tiltY = -14,
 }: {
   src: string;
   alt: string;
@@ -121,7 +121,7 @@ function VideoPhoneMockup({
   className = '',
   glowColor = 'rgba(255,0,144,0.15)',
   delay = 0,
-  tiltY = -14,
+  tiltY = 14,
 }: {
   videoSrc: string;
   className?: string;

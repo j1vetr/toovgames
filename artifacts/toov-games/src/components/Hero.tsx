@@ -111,7 +111,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-[100dvh] w-full flex items-center justify-center overflow-hidden">
+    <section id="home" ref={containerRef} className="relative h-[100dvh] w-full flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-background" />

@@ -297,7 +297,7 @@ export function AppShowcase() {
   const accent = APPS[activeIdx].color1;
 
   return (
-    <section className="relative pt-20 md:pt-32 pb-24 md:pb-32 w-full overflow-hidden">
+    <section id="apps" className="relative pt-20 md:pt-32 pb-24 md:pb-32 w-full overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent to-transparent"

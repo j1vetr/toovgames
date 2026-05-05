@@ -11,7 +11,7 @@ export function Footer() {
 
   return (
     <>
-      <footer className="relative w-full pt-20 pb-10 px-6 md:px-12 overflow-hidden">
+      <footer id="contact" className="relative w-full pt-20 pb-10 px-6 md:px-12 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
 
         <div className="max-w-[1400px] mx-auto">

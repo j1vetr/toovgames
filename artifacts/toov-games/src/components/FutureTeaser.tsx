@@ -17,6 +17,7 @@ export function FutureTeaser() {
 
   return (
     <section
+      id="future"
       ref={sectionRef}
       className="relative py-24 md:py-36 w-full flex items-center justify-center overflow-hidden"
     >

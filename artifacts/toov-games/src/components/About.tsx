@@ -59,7 +59,7 @@ export function About() {
   );
 
   return (
-    <section ref={sectionRef} className="relative py-32 md:py-48 w-full overflow-hidden">
+    <section id="about" ref={sectionRef} className="relative py-32 md:py-48 w-full overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.03] to-transparent" />
       </div>

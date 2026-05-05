@@ -368,7 +368,7 @@ export function GameShowcase() {
   const [activeIdx, setActiveIdx] = useState(0);
 
   return (
-    <section className="relative pt-16 md:pt-28 pb-24 md:pb-32 w-full overflow-hidden">
+    <section id="games" className="relative pt-16 md:pt-28 pb-24 md:pb-32 w-full overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[rgba(0,240,255,0.1)] to-transparent" />
         <div className="absolute top-1/3 left-0 w-[40%] h-[600px] bg-[radial-gradient(ellipse,rgba(0,240,255,0.04)_0%,transparent_70%)]" />

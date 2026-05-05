@@ -85,25 +85,28 @@ function PhoneMockup({
   className = '',
   glowColor = 'cyan',
   delay = 0,
+  tiltY = 14,
 }: {
   src: string;
   alt: string;
   className?: string;
   glowColor?: string;
   delay?: number;
+  tiltY?: number;
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 60, rotateY: -8 }}
-      whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+      initial={{ opacity: 0, y: 60, rotateY: tiltY * 1.5 }}
+      whileInView={{ opacity: 1, y: 0, rotateY: tiltY }}
+      whileHover={{ rotateY: tiltY * 0.4, scale: 1.02 }}
       viewport={{ once: true, margin: '-10%' }}
       transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
       className={className}
-      style={{ perspective: 1000 }}
+      style={{ perspective: 1200, transformStyle: 'preserve-3d' }}
     >
       <div
         className="phone-mockup phone-mockup-lg transition-shadow duration-700"
-        style={{ boxShadow: `0 0 60px ${glowColor}, 0 20px 60px rgba(0,0,0,0.6)` }}
+        style={{ boxShadow: `0 0 60px ${glowColor}, 0 30px 80px rgba(0,0,0,0.7)` }}
       >
         <div className="phone-screen">
           <img src={src} alt={alt} className="w-full h-full object-cover" />
@@ -118,11 +121,13 @@ function VideoPhoneMockup({
   className = '',
   glowColor = 'rgba(255,0,144,0.15)',
   delay = 0,
+  tiltY = -14,
 }: {
   videoSrc: string;
   className?: string;
   glowColor?: string;
   delay?: number;
+  tiltY?: number;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -147,16 +152,17 @@ function VideoPhoneMockup({
   return (
     <motion.div
       ref={containerRef}
-      initial={{ opacity: 0, y: 60, rotateY: 8 }}
-      whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+      initial={{ opacity: 0, y: 60, rotateY: tiltY * 1.5 }}
+      whileInView={{ opacity: 1, y: 0, rotateY: tiltY }}
+      whileHover={{ rotateY: tiltY * 0.4, scale: 1.02 }}
       viewport={{ once: true, margin: '-10%' }}
       transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
       className={className}
-      style={{ perspective: 1000 }}
+      style={{ perspective: 1200, transformStyle: 'preserve-3d' }}
     >
       <div
         className="phone-mockup phone-mockup-lg transition-shadow duration-700"
-        style={{ boxShadow: `0 0 60px ${glowColor}, 0 20px 60px rgba(0,0,0,0.6)` }}
+        style={{ boxShadow: `0 0 60px ${glowColor}, 0 30px 80px rgba(0,0,0,0.7)` }}
       >
         <div className="phone-screen">
           <video

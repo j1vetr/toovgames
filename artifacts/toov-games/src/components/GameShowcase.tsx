@@ -106,7 +106,7 @@ function PhoneMockup({
     >
       <div
         className="phone-mockup phone-mockup-lg transition-shadow duration-700"
-        style={{ boxShadow: `0 0 60px ${glowColor}, 0 30px 80px rgba(0,0,0,0.7)` }}
+        style={{ boxShadow: '0 30px 80px rgba(0,0,0,0.7)' }}
       >
         <div className="phone-screen">
           <img src={src} alt={alt} className="w-full h-full object-cover" />
@@ -162,7 +162,7 @@ function VideoPhoneMockup({
     >
       <div
         className="phone-mockup phone-mockup-lg transition-shadow duration-700"
-        style={{ boxShadow: `0 0 60px ${glowColor}, 0 30px 80px rgba(0,0,0,0.7)` }}
+        style={{ boxShadow: '0 30px 80px rgba(0,0,0,0.7)' }}
       >
         <div className="phone-screen">
           <video

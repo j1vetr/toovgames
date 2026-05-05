@@ -4,6 +4,7 @@ import { Navbar } from './Navbar';
 import { Hero } from './Hero';
 import { About } from './About';
 import { GameShowcase } from './GameShowcase';
+import { AppShowcase } from './AppShowcase';
 import { FutureTeaser } from './FutureTeaser';
 import { Footer } from './Footer';
 import { Preloader } from './Preloader';
@@ -21,6 +22,7 @@ export function Layout() {
           <Hero />
           <About />
           <GameShowcase />
+          <AppShowcase />
           <FutureTeaser />
         </main>
         <Footer />

@@ -47,7 +47,7 @@ const APPS: AppData[] = [
     screen1: carsiScreen1,
     screen2: carsiScreen2,
     storeUrl: 'https://play.google.com/store/apps/details?id=com.toov1.dovizaltin&hl=tr',
-    storeTextEn: 'Get it on',
+    storeTextEn: 'Download on',
     storeTextTr: 'İndir',
   },
 ];
@@ -92,7 +92,7 @@ function PhoneMockup({
         style={{ boxShadow: `0 0 60px ${glowColor}, 0 20px 60px rgba(0,0,0,0.6)` }}
       >
         <div className="phone-screen">
-          <img src={src} alt={alt} className="w-full h-full object-cover" />
+          <img src={src} alt={alt} className="w-full h-full object-contain bg-white" />
         </div>
       </div>
     </motion.div>
@@ -184,10 +184,10 @@ function AppContent({ app }: { app: AppData }) {
         <div className="flex-1 max-w-xl text-center px-4">
           <div
             ref={titleRef}
-            className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-[-0.02em] leading-[0.9]"
+            className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-[-0.02em] leading-[1.05]"
             style={{ perspective: 600 }}
           >
-            <div className="mb-2">
+            <div className="mb-4 md:mb-5">
               {app.titleLine1.split('').map((letter, i) => (
                 <span
                   key={`l1-${app.id}-${i}`}
